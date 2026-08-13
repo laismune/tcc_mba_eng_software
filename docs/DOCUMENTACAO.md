@@ -251,58 +251,12 @@ Por trocarem apenas o parser e o cálculo, GetStats e QuickVol compartilham a me
 - **Depende de:** nenhum arquivo interno
 - **Utilizado por:** `ForestFlow.jsx`
 
-#### `src/components/Stat.jsx` ⚠ *não utilizado*
-- **Responsabilidade:** Componente de estatística com contador animado (número sobe até o valor-alvo quando entra na tela), originalmente usado na seção "Sobre" da home.
-- **Props:** `label, target`
-- **Depende de:** `hooks/useCountUp.js`, `hooks/useInView.js`
-- **Utilizado por:** nenhum (não utilizado)
-- *A seção "Sobre" foi removida da home ao longo do desenvolvimento; este componente e o hook `useCountUp.js` ficaram sem nenhum ponto de uso.*
-
-### 5.3 `components/icons/`
-
-Pasta criada para separar ícones e ilustrações de marca (desenhos próprios do ForestFlow) dos ícones genéricos de interface, que passaram a vir da biblioteca `lucide-react` (usada atualmente em `Nav.jsx` — Menu, ChevronDown — e `ProductPage.jsx` — HelpCircle).
-
-#### `src/components/icons/ForestFlowLogo.jsx`
-- **Responsabilidade:** Logo da árvore estilizada usada ao lado do nome "ForestFlow" na barra de navegação.
-- **Props:** `className, size` (padrão 24)
-- **Utilizado por:** `components/Nav.jsx`
-
-#### `src/components/icons/TreeIllustration.jsx` ⚠ *não utilizado*
-- **Responsabilidade:** Versão isolada, em componente próprio, da árvore animada usada na Hero. Mantém as classes `ff-tree` e `trunk` exigidas pela animação definida em `ForestFlow.css`.
-- **Props:** `className`
-- **Utilizado por:** nenhum
-- *`components/Hero.jsx` continua com o SVG equivalente escrito inline; este componente foi criado durante a reorganização de ícones mas a substituição em Hero.jsx não chegou a ser aplicada.*
-
-#### `src/components/icons/LogsIllustration.jsx` ⚠ *não utilizado*
-- **Responsabilidade:** Ilustração de toras de madeira empilhadas, originalmente exibida junto ao resultado do QuickVol.
-- **Props:** `className, width` (padrão 110)
-- **Utilizado por:** nenhum
-- *Removida de `VolumeResult.jsx` a pedido do usuário ("tirar o svg" do resultado).*
-
-#### `src/components/icons/WoodBoxIllustration.jsx` ⚠ *não utilizado*
-- **Responsabilidade:** Ilustração de uma caixa de madeira aberta, originalmente exibida na coluna de botões da ProductPage.
-- **Props:** `className, width` (padrão 150)
-- **Utilizado por:** nenhum
-- *Removida de `ProductPage.jsx` a pedido do usuário ("pode tirar o icone, vai ficar sem imagem").*
-
-#### `src/components/icons/UploadArrowIllustration.jsx` ⚠ *não utilizado*
-- **Responsabilidade:** Ilustração de seta de upload com pontos, exibida junto à caixa de madeira na ProductPage.
-- **Props:** `className, width` (padrão 90)
-- **Utilizado por:** nenhum
-- *Removida junto com `WoodBoxIllustration.jsx`.*
-
 ### 5.4 `hooks/`
 
 #### `src/hooks/useInView.js`
 - **Responsabilidade:** Hook que retorna uma ref e um booleano indicando se o elemento associado já entrou na viewport, usando `IntersectionObserver`. Usado para acionar animações de entrada (fade + translateY) quando o usuário rola a página até o elemento.
 - **Exports:** `export function useInView(threshold = 0.2)`
 - **Utilizado por:** `components/ProductCard.jsx`, `components/Stat.jsx` (órfão)
-
-#### `src/hooks/useCountUp.js` ⚠ *não utilizado*
-- **Responsabilidade:** Hook que anima a contagem de um número de 0 até um valor-alvo, usando `requestAnimationFrame`, disparado quando o parâmetro `active` se torna verdadeiro.
-- **Exports:** `export function useCountUp(target, active)`
-- **Utilizado por:** nenhum
-- *Único consumidor era `components/Stat.jsx`, também órfão.*
 
 ### 5.5 `utils/`
 
@@ -364,21 +318,6 @@ Camada de lógica pura (sem JSX, sem hooks de React), responsável por ler arqui
 - **Exports:** `export function downloadVolumeResultsXlsx(rows, hasAgregador, filename)`
 - **Depende de:** `xlsx`
 - **Utilizado por:** `components/ProductPage.jsx`
-
-#### `src/utils/parseSpreadsheet.js` ⚠ *não utilizado*
-- **Responsabilidade:** Primeira versão do parser do GetStats: lia cada coluna de forma independente (sem manter o vínculo entre colunas de uma mesma linha).
-- **Exports:** `export async function parseSpreadsheetColumns(file, columns)`
-- **Depende de:** `utils/readWorkbookFromFile.js`, `xlsx`
-- **Utilizado por:** nenhum
-- *Substituído por `parseGetStatsFile.js` quando o recurso de agregador foi adicionado ao GetStats, pois agrupar por agregador exige preservar o vínculo entre as colunas de cada linha.*
-
-#### `src/utils/parseSpreadsheetRows.js` ⚠ *não utilizado*
-- **Responsabilidade:** Primeira versão do parser do QuickVol, com leitura alinhada por linha (dap + ht), mas sem suporte a agregador, sem `toNumber` (vírgula decimal) e sem detecção de CSV.
-- **Exports:** `export async function parseSpreadsheetRows(file, requiredColumns)`
-- **Depende de:** `xlsx`
-- **Utilizado por:** nenhum
-- *Substituído por `parseQuickVolFile.js`.*
-
 ---
 
 ## 6. Bibliotecas Externas
@@ -394,24 +333,6 @@ Camada de lógica pura (sem JSX, sem hooks de React), responsável por ler arqui
 
 ---
 
-## 7. Arquivos Não Utilizados (Débito Técnico)
-
-Ao longo do desenvolvimento iterativo, algumas mudanças de direção deixaram arquivos sem nenhum ponto de importação no restante do código. Eles não afetam o funcionamento da aplicação (o bundler simplesmente não os inclui no build final), mas ficam listados aqui por transparência e para orientar uma eventual limpeza:
-
-| Arquivo | Status | Motivo |
-|---|---|---|
-| `components/Stat.jsx` | Não usado | Órfão desde a remoção da seção "Sobre" da home. |
-| `hooks/useCountUp.js` | Não usado | Único consumidor era `Stat.jsx`. |
-| `components/icons/TreeIllustration.jsx` | Não usado | Criado na reorganização de ícones; `Hero.jsx` não foi migrado para usá-lo. |
-| `components/icons/LogsIllustration.jsx` | Não usado | Removido do resultado do QuickVol a pedido do usuário. |
-| `components/icons/WoodBoxIllustration.jsx` | Não usado | Removido da ProductPage a pedido do usuário. |
-| `components/icons/UploadArrowIllustration.jsx` | Não usado | Removido junto com a caixa de madeira. |
-| `utils/parseSpreadsheet.js` | Não usado | Substituído por `parseGetStatsFile.js`. |
-| `utils/parseSpreadsheetRows.js` | Não usado | Substituído por `parseQuickVolFile.js`. |
-
-Recomenda-se remover esses 8 arquivos antes da entrega final do sistema, ou documentá-los explicitamente como "protótipos descartados" caso o TCC opte por discutir a evolução iterativa do desenvolvimento como parte da metodologia.
-
----
 
 ## 8. Considerações Finais
 
