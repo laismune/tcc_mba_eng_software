@@ -1,34 +1,60 @@
 import { mean } from "./statistics";
 
-/**
- * rows: [{ id, agregador, dap, altura, volume }, ...]  (já com volume calculado)
- * Retorna { total: number, byAggregator: { [agregador]: number } }
- */
 export function computeVolumeByScope(rows, hasAgregador) {
-  const average = mean(rows.map((r) => r.volume));
-  const count = rows.length;
-  const sum = rows.reduce(
-    (sum, r) => sum + Number(r.volume || 0),
+  const volumes = rows.map((r) => Number(r.volume || 0));
+
+  const sum = volumes.reduce(
+    (total, volume) => total + volume,
     0
   );
 
+  const average = mean(volumes);
+  const count = volumes.length;
+
   const byAggregator = {};
+  const sumByAggregator = {};
+  const averageByAggregator = {};
+  const countByAggregator = {};
+
   if (hasAgregador) {
     const groups = {};
+
     rows.forEach((r) => {
       const key = r.agregador ?? "Sem agregador";
-      if (!groups[key]) groups[key] = [];
-      groups[key].push(r.volume);
+
+      if (!groups[key]) {
+        groups[key] = [];
+      }
+
+      groups[key].push(Number(r.volume || 0));
     });
+
     Object.entries(groups).forEach(([key, volumes]) => {
-      byAggregator[key] = mean(volumes);
-      count =  rows.length;
-      sum = rows.reduce(
-        (sum, r) => sum + Number(r.volume || 0),
+      const aggregatorSum = volumes.reduce(
+        (total, volume) => total + volume,
         0
       );
+
+      const aggregatorAverage = mean(volumes);
+      const aggregatorCount = volumes.length;
+
+      // Mantém compatibilidade com seu código antigo
+      byAggregator[key] = aggregatorSum;
+
+      // Novos valores
+      sumByAggregator[key] = aggregatorSum;
+      averageByAggregator[key] = aggregatorAverage;
+      countByAggregator[key] = aggregatorCount;
     });
   }
 
-  return { count, average, sum, byAggregator };
+  return {
+    sum,
+    average,
+    count,
+    byAggregator,
+    sumByAggregator,
+    averageByAggregator,
+    countByAggregator,
+  };
 }

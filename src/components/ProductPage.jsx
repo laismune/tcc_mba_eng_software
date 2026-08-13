@@ -123,22 +123,30 @@ export function ProductPage({ title, onBack, onNavigate }) {
     setVolumeScopeResults(computeVolumeByScope(rowsWithVolume, hasAgregador));
   };
 
-  const currentCountVol = 
-  volumeScopeResults &&
-    (selectedScope === "total" ? volumeScopeResults.count : volumeScopeResults.byAggregator[selectedScope]);
+  const currentCountVol =
+  selectedScope === "total"
+    ? volumeScopeResults?.count
+    : volumeScopeResults?.countByAggregator?.[selectedScope];
 
   const currentSumVol =
-    volumeScopeResults &&
-    (selectedScope === "total" ? volumeScopeResults.sum : volumeScopeResults.byAggregator[selectedScope]);
+    selectedScope === "total"
+      ? volumeScopeResults?.sum
+      : volumeScopeResults?.sumByAggregator?.[selectedScope];
 
   const currentAverageVol =
-    volumeScopeResults &&
-    (selectedScope === "total" ? volumeScopeResults.average : volumeScopeResults.byAggregator[selectedScope]);
+    selectedScope === "total"
+      ? volumeScopeResults?.average
+      : volumeScopeResults?.averageByAggregator?.[selectedScope];
 
   const currentStats =
     statsScopeResults &&
     (selectedScope === "total" ? statsScopeResults.total : statsScopeResults.byAggregator[selectedScope]);
 
+    console.log("RESULTADOS:", volumeScopeResults);
+console.log("ESCOPO:", selectedScope);
+console.log("COUNT:", currentCountVol);
+console.log("SUM:", currentSumVol);
+console.log("AVERAGE:", currentAverageVol);
   return (
     <div className="ff">
       <Nav
