@@ -690,6 +690,11 @@ html, body{
   max-width:100%;
   width:100%;
 }
+
+.ff-volume-result__text{
+  margin-bottom: 5%;
+}
+
 .ff-volume-result__text p{
   font-size:1.25rem;
   line-height:1.5;
@@ -712,7 +717,6 @@ html, body{
 .ff-volume-result__equation{
   display:inline-block;
   margin:0.4rem 0;
-  font-family:'IBM Plex Mono', monospace;
   font-size:0.95rem;
   color:var(--forest-deep-2);
 }

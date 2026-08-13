@@ -123,9 +123,17 @@ export function ProductPage({ title, onBack, onNavigate }) {
     setVolumeScopeResults(computeVolumeByScope(rowsWithVolume, hasAgregador));
   };
 
-  const currentVolume =
+  const currentCountVol = 
+  volumeScopeResults &&
+    (selectedScope === "total" ? volumeScopeResults.count : volumeScopeResults.byAggregator[selectedScope]);
+
+  const currentSumVol =
     volumeScopeResults &&
-    (selectedScope === "total" ? volumeScopeResults.total : volumeScopeResults.byAggregator[selectedScope]);
+    (selectedScope === "total" ? volumeScopeResults.sum : volumeScopeResults.byAggregator[selectedScope]);
+
+  const currentAverageVol =
+    volumeScopeResults &&
+    (selectedScope === "total" ? volumeScopeResults.average : volumeScopeResults.byAggregator[selectedScope]);
 
   const currentStats =
     statsScopeResults &&
@@ -235,7 +243,7 @@ export function ProductPage({ title, onBack, onNavigate }) {
                   onSelect={setSelectedScope}
                 />
               )}
-              <VolumeResult value={currentVolume} regionKey={region} />
+              <VolumeResult value={currentAverageVol} count={currentCountVol} sum={currentSumVol} regionKey={region} />
               <button
                 type="button"
                 className="ff-page-btn ff-page-download"

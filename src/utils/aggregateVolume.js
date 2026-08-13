@@ -5,7 +5,12 @@ import { mean } from "./statistics";
  * Retorna { total: number, byAggregator: { [agregador]: number } }
  */
 export function computeVolumeByScope(rows, hasAgregador) {
-  const total = mean(rows.map((r) => r.volume));
+  const average = mean(rows.map((r) => r.volume));
+  const count = rows.length;
+  const sum = rows.reduce(
+    (sum, r) => sum + Number(r.volume || 0),
+    0
+  );
 
   const byAggregator = {};
   if (hasAgregador) {
@@ -17,8 +22,13 @@ export function computeVolumeByScope(rows, hasAgregador) {
     });
     Object.entries(groups).forEach(([key, volumes]) => {
       byAggregator[key] = mean(volumes);
+      count =  rows.length;
+      sum = rows.reduce(
+        (sum, r) => sum + Number(r.volume || 0),
+        0
+      );
     });
   }
 
-  return { total, byAggregator };
+  return { count, average, sum, byAggregator };
 }
