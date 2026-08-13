@@ -20,7 +20,6 @@ export function amplitude(values) {
   return max(values) - min(values);
 }
 
-// Desvio-padrão amostral (n - 1), o padrão usado em inventário florestal
 export function standardDeviation(values) {
   if (values.length < 2) return 0;
   const m = mean(values);

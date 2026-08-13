@@ -39,7 +39,6 @@ export function ProductPage({ title, onBack, onNavigate }) {
   const [regionMenuOpen, setRegionMenuOpen] = useState(false);
   const [volumeScopeResults, setVolumeScopeResults] = useState(null); // { total, byAggregator }
 
-  // Guardamos as linhas cruas do QuickVol (antes de escolher a região) até o cálculo acontecer
   const rawRowsRef = useRef(null);
 
   const handleUploadClick = () => fileInputRef.current?.click();

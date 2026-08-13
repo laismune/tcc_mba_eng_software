@@ -4,10 +4,6 @@ import * as XLSX from "xlsx";
 
 const COLUMNS = ["dap", "altura", "vol"];
 
-/**
- * Lê o arquivo do GetStats (.xlsx, .xls ou .csv), linha a linha,
- * mantendo o valor de "agregador" de cada linha (se existir na planilha).
- */
 export async function parseGetStatsFile(file) {
   const workbook = await readWorkbookFromFile(file);
   const sheetName = workbook.SheetNames[0];

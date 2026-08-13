@@ -1,10 +1,5 @@
 import * as XLSX from "xlsx";
 
-/**
- * Lê o arquivo enviado no QuickVol.
- * Exige as colunas dap e altura (linhas sem as duas são descartadas).
- * A coluna agregador é opcional — se existir, é mantida linha a linha.
- */
 export async function parseQuickVolFile(file) {
   const buffer = await file.arrayBuffer();
   const workbook = XLSX.read(buffer, { type: "array" });

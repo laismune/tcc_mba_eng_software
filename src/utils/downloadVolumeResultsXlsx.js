@@ -1,9 +1,5 @@
 import * as XLSX from "xlsx";
 
-/**
- * rows: [{ id, agregador, dap, altura, volume }, ...]
- * Gera um .xlsx com as colunas: id, agregador (se existir), dap, altura, volume
- */
 export function downloadVolumeResultsXlsx(rows, hasAgregador, filename = "resultado_quickvol.xlsx") {
   const data = rows.map((r) => {
     const row = { id: r.id };

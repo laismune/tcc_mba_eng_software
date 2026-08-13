@@ -8,7 +8,7 @@ export function Nav({
   topRef,
   produtosRef,
   onNavigate,
-  onHome, // usado quando não há refs de scroll (ex: dentro de uma ProductPage)
+  onHome, 
 }) {
   const [produtosOpen, setProdutosOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -39,8 +39,6 @@ export function Nav({
     onNavigate?.(key);
   };
 
-  // Se tiver refs de scroll (estamos na home), rola até a seção.
-  // Se não (estamos numa ProductPage), volta pra home primeiro.
   const goInicio = () => {
     if (topRef) scrollTo(topRef);
     else onHome?.();

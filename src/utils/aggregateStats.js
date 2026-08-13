@@ -13,10 +13,6 @@ function buildStats(rows) {
   return result;
 }
 
-/**
- * rows: [{ agregador, dap, ht, vol }, ...]
- * Retorna { total: {dap:{...}, altura:{...}, vol:{...}}, byAggregator: { [agregador]: {...} } }
- */
 export function computeStatsByScope(rows, hasAgregador) {
   const total = buildStats(rows);
 

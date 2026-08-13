@@ -2,7 +2,7 @@ export function Hero({ topRef, scrollTo, produtosRef }) {
   return (
     <section ref={topRef} className="ff-hero">
       <svg className="ff-tree" viewBox="0 0 120 150">
-        {/* copa do eucalipto */}
+        {/* copa */}
         <path
           d="M52 24 C44 20, 37 25, 39 33 C30 31, 26 39, 32 45 C24 50, 26 59, 34 62 C29 70, 35 78, 44 76 C46 84, 55 87, 61 80 C69 86, 77 80, 73 72 C82 73, 87 65, 80 59 C87 53, 84 44, 76 42 C81 34, 74 27, 66 30 C65 23, 58 21, 52 24 Z"
         />
