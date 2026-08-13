@@ -40,19 +40,10 @@ src/
 │   ├── VolumeResult.jsx
 │   ├── RegionDropdown.jsx
 │   ├── ScopeDropdown.jsx
-│   ├── Footer.jsx
-│   ├── Stat.jsx                      (não utilizado)
-│   │
-│   └── icons/
-│       ├── ForestFlowLogo.jsx
-│       ├── TreeIllustration.jsx      (não utilizado)
-│       ├── LogsIllustration.jsx      (não utilizado)
-│       ├── WoodBoxIllustration.jsx   (não utilizado)
-│       └── UploadArrowIllustration.jsx (não utilizado)
+│   └── Footer.jsx
 │
 ├── hooks/
-│   ├── useInView.js
-│   └── useCountUp.js                 (não utilizado)
+│   └── useInView.js
 │
 └── utils/
     ├── statistics.js
@@ -64,9 +55,7 @@ src/
     ├── aggregateVolume.js
     ├── volumeEquations.js
     ├── downloadTemplateXlsx.js
-    ├── downloadVolumeResultsXlsx.js
-    ├── parseSpreadsheet.js           (não utilizado)
-    └── parseSpreadsheetRows.js       (não utilizado)
+    └── downloadVolumeResultsXlsx.js
 ```
 
 A raiz do projeto Vite (fora de `src/`) segue a estrutura padrão gerada por `npm create vite@latest` — `node_modules/`, `index.html`, `package.json`, `vite.config.js` — e não é detalhada aqui por não conter lógica própria do ForestFlow.
