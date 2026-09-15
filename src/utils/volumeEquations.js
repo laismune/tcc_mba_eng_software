@@ -1,6 +1,5 @@
 // Volume = coef * dap^dapExp * h^hExp  (dap em cm, h em m, volume em m³)
 export const VOLUME_EQUATIONS = {
-  norte: { label: "Norte", coef: 0.00007, dapExp: 1.8878, hExp: 0.86235 },
   nordeste: { label: "Nordeste", coef: 0.00007, dapExp: 1.9197, hExp: 0.88099 },
   centroOeste: { label: "Centro-Oeste", coef: 0.00004, dapExp: 1.6998, hExp: 1.2134 },
   sudeste: { label: "Sudeste", coef: 0.00005, dapExp: 2.2187, hExp: 0.66575 },

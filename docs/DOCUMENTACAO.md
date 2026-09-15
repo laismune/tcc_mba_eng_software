@@ -11,7 +11,7 @@ Documentação de arquitetura e estrutura de código — material de apoio ao Tr
 O ForestFlow é uma aplicação web voltada para engenheiros florestais e técnicos que precisam transformar medições de campo (diâmetro à altura do peito, altura total e, opcionalmente, volume) em informações prontas para decisão. O sistema é composto por duas ferramentas principais:
 
 - **GetStats** — recebe uma planilha com as colunas `dap`, `altura` e/ou `vol` e devolve estatísticas descritivas (média, mediana, mínimo, máximo, amplitude, desvio-padrão e coeficiente de variação) de cada variável, no total ou por agregador (talhão/parcela).
-- **QuickVol** — recebe `dap` e `altura` de cada árvore, aplica uma equação volumétrica regional (Norte, Nordeste, Centro-Oeste, Sudeste ou Sul) e devolve o volume médio de madeira, no total ou por agregador, com opção de baixar o resultado completo em planilha.
+- **QuickVol** — recebe `dap` e `altura` de cada árvore, aplica uma equação volumétrica regional (Nordeste, Centro-Oeste, Sudeste ou Sul) e devolve o volume médio de madeira, no total ou por agregador, com opção de baixar o resultado completo em planilha.
 
 O front-end foi construído em React (Vite), sem back-end: toda a leitura de arquivos (`.xlsx`, `.xls` e `.csv`), os cálculos estatísticos e volumétricos, e a geração dos arquivos de saída acontecem inteiramente no navegador do usuário, usando a biblioteca SheetJS (`xlsx`) para leitura/escrita de planilhas.
 
@@ -292,7 +292,7 @@ Camada de lógica pura (sem JSX, sem hooks de React), responsável por ler arqui
 - **Utilizado por:** `components/ProductPage.jsx`
 
 #### `src/utils/volumeEquations.js`
-- **Responsabilidade:** Define as 5 equações volumétricas regionais (Norte, Nordeste, Centro-Oeste, Sudeste e Sul), no formato `Volume = coef × dap^dapExp × h^hExp` (equação de Schumacher e Hall), e as funções que aplicam a equação a uma árvore ou a um conjunto de árvores.
+- **Responsabilidade:** Define as 5 equações volumétricas regionais (Nordeste, Centro-Oeste, Sudeste e Sul), no formato `Volume = coef × dap^dapExp × h^hExp` (equação de Schumacher e Hall), e as funções que aplicam a equação a uma árvore ou a um conjunto de árvores.
 - **Exports:** `VOLUME_EQUATIONS` (objeto), `calculateVolume(dap, h, regionKey)`, `calculateVolumes(dapValues, hValues, regionKey)`
 - **Utilizado por:** `components/RegionDropdown.jsx`, `components/VolumeResult.jsx`, `components/ProductPage.jsx`
 
